@@ -1,0 +1,9 @@
+{# templates/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <img src="{{ asset('images/image.png') }}" alt="Image">
+    <h2>Hello from Tunisia</h2>
+    <p>It's currently {{ 'now'|date('h:i A') }}</p>
+    <a href="{{ path('app_about') }}">About Us</a>
+{% endblock %}
