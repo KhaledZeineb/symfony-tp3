@@ -3,3 +3,9 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+user_authentication:
+    resource:
+        path: ../src/Controller/RegistrationController.php
+        namespace: App\Controller
+    type: attribute
