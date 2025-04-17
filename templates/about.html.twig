@@ -2,8 +2,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <img src="{{ asset('images/image2.jpg') }}" alt="Image 1">
-    <h2>built with LOVE by your_name</h2>
-    <a href="{{ path('app_home') }}">Home page</a>
-{% endblock %}
+    <section style="max-width: 800px; margin: 3rem auto; padding: 2rem; background-color: #fdfdfd; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); text-align: center;">
+        
+        <img src="{{ asset('images/traditionnel.jpg') }}" alt="Artisanat tunisien" style="max-width: 200px; border-radius: 12px; object-fit: cover; margin-bottom: 1.5rem;">
+        
+        <h2 style="font-size: 2rem; color: #8e44ad;">À propos de <strong>TuniShop</strong></h2>
+        
+        <p style="margin-top: 1rem; font-size: 1.1rem; color: #555;">
+            <strong>TuniShop</strong> est une plateforme dédiée à la mise en valeur de l’artisanat tunisien.
+            Nous croyons au pouvoir de la tradition, de la créativité locale et de l’authenticité.
+            Notre mission ? <em>Connecter les artisans passionnés avec des amoureux de produits uniques</em>.
+        </p>
 
+        <p style="margin-top: 1rem; font-size: 1.1rem; color: #555;">
+            Derrière ce projet se cache une idée simple : rendre accessibles des trésors faits main 🇹🇳,
+            tout en soutenant les communautés locales et en célébrant notre riche patrimoine.
+        </p>
+
+        <p style="margin-top: 1rem; font-size: 1rem; color: #888;">
+            ✨ Site conçu avec amour par <strong>Zeineb</strong> – passionnée par la tech & les traditions !
+        </p>
+
+        <a href="{{ path('app_index') }}" style="display: inline-block; margin-top: 2rem; padding: 0.75rem 1.5rem; background-color: #8e44ad; color: white; border-radius: 8px; text-decoration: none;">
+            Retour à la page d'accueil
+        </a>
+    </section>
+{% endblock %}

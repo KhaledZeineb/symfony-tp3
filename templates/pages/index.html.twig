@@ -2,8 +2,61 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <img src="{{ asset('images/image.png') }}" alt="Image">
-    <h2>Hello from Tunisia</h2>
-    <p>It's currently {{ 'now'|date('h:i A') }}</p>
-    <a href="{{ path('app_about') }}">About Us</a>
+    <div class="homepage">
+
+        <header class="hero-section" style="text-align: center; padding: 3rem 1rem; background-color: #f8f9fa;">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" style="max-width: 150px; border-radius: 50%; object-fit: cover;">
+            <h1 style="margin-top: 1rem; font-size: 2.5rem;">Bienvenue sur <span style="color: #8e44ad;">TuniShop</span> 🛍️</h1>
+            <p style="font-size: 1.2rem; color: #555;">Découvrez l'artisanat tunisien authentique et bien plus encore.</p>
+            <a href="{{ path('app_about') }}" style="display: inline-block; margin-top: 1.5rem; padding: 0.75rem 1.5rem; background-color: #8e44ad; color: white; border-radius: 8px; text-decoration: none;">À propos</a>
+        </header>
+
+        {% set produits = [
+            {
+                image: 'huile-olive.jpg',
+                nom: 'Huile d\'olive extra vierge',
+                description: 'Pressée à froid, pure et 100% bio de Sfax.',
+                prix: 29.99
+            },
+            {
+                image: 'tapis-kairouan.jpg',
+                nom: 'Tapis traditionnel de Kairouan',
+                description: 'Tissé à la main avec motifs berbères.',
+                prix: 199.99
+            },
+            {
+                image: 'potterie-nefta.jpg',
+                nom: 'Potterie artisanale de Nefta',
+                description: 'Parfait pour la décoration ou le service de thé.',
+                prix: 45.50
+            },
+            {
+                image: 'baklawa.jpg',
+                nom: 'Baklawa tunisienne',
+                description: 'Un mélange de miel, de pistaches et d’amandes, fait maison.',
+                prix: 50.00
+            }
+        ] %}
+
+        <section class="featured-products" style="padding: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Produits en vedette</h2>
+
+            <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem;">
+                {% for produit in produits %}
+                    <div class="product-card" style="border: 1px solid #ddd; border-radius: 10px; padding: 1rem; text-align: center;">
+                        <img src="{{ asset('images/' ~ produit.image) }}" alt="{{ produit.nom }}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;">
+                        <h3 style="margin-top: 1rem;">{{ produit.nom }}</h3>
+                        <p style="color: #666;">{{ produit.description }}</p>
+                        <strong style="color: #8e44ad;">{{ produit.prix }} TND</strong><br>
+                        <button style="margin-top: 0.5rem; padding: 0.5rem 1rem; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        
+
+    </div>
 {% endblock %}
