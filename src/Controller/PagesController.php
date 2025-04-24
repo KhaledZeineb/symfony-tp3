@@ -12,8 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class PagesController extends AbstractController
-{
+class PagesController extends AbstractController {
     #[Route('/', name: 'app_home')]
     public function home(): Response
     {
@@ -59,7 +58,7 @@ class PagesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle form submission logic similar to your RegistrationController
+            // Handle form submission logic
             $plainPassword = $form->get('plainPassword')->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             
@@ -76,11 +75,12 @@ class PagesController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+
     #[Route('/logout', name: 'app_logout')]
-public function logout(): void
-{
-    // This method can be empty, as it will be intercepted by the logout key on your firewall
-    // It will never be executed
-    throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-}
+    public function logout(): void
+    {
+        // This method can be empty, as it will be intercepted by the logout key on your firewall
+        // It will never be executed
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
 }
