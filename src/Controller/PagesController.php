@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -12,8 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-class PagesController extends AbstractController {
-    #[Route('/', name: 'app_home')]
+class PagesController extends AbstractController
+{
+     #[Route('/', name: 'app_home')]
     public function home(): Response
     {
         return $this->render('base.html.twig');
@@ -22,29 +22,55 @@ class PagesController extends AbstractController {
     #[Route('/pages', name: 'app_index')]
     public function index(): Response
     {
+        // Définissez vos produits directement dans un tableau
+        $produits = [
+            [
+                'id' => 1,
+                'nom' => 'Poterie tunisienne',
+                'description' => 'Magnifique poterie artisanale de Nabeul',
+                'prix' => 45.99,
+                'image' => 'poterie.jpg'
+            ],
+            [
+                'id' => 2,
+                'nom' => 'Tapis berbère',
+                'description' => 'Tapis traditionnel tissé à la main',
+                'prix' => 120.50,
+                'image' => 'tapis.jpg'
+            ],
+            [
+                'id' => 3,
+                'nom' => 'Caftan tunisien',
+                'description' => 'Caftan traditionnel brodé main',
+                'prix' => 89.99,
+                'image' => 'caftan.jpg'
+            ],
+            [
+                'id' => 4,
+                'nom' => 'Plateau en cuivre',
+                'description' => 'Plateau artisanal gravé en cuivre',
+                'prix' => 35.75,
+                'image' => 'plateau.jpg'
+            ]
+        ];
+        
         return $this->render('pages/index.html.twig', [
-            'controller_name' => 'PagesController',
+            'produits' => $produits,
         ]);
     }
-
     #[Route('/about', name: 'app_about')]
     public function about(): Response
     {
-        return $this->render('about.html.twig', [
-            'controller_name' => 'PagesController',
-        ]);
+        return $this->render('about.html.twig'); // À la racine de templates/
     }
 
     #[Route('/connexion', name: 'app_connexion')]
-    public function connexion(Request $request, \Symfony\Component\Security\Http\Authentication\AuthenticationUtils $authenticationUtils): Response
+    public function connexion(AuthenticationUtils $authenticationUtils): Response
     {
-        // Get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        
-        // Last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         
-        return $this->render('connexion.html.twig', [
+        return $this->render('connexion.html.twig', [ // À la racine de templates/
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
@@ -58,16 +84,16 @@ class PagesController extends AbstractController {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Handle form submission logic
-            $plainPassword = $form->get('plainPassword')->getData();
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
             
             $entityManager->persist($user);
             $entityManager->flush();
-            
-            // Add additional logic if needed (email verification, login, etc.)
-            
-            // Redirect to appropriate page after successful registration
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -79,8 +105,6 @@ class PagesController extends AbstractController {
     #[Route('/logout', name: 'app_logout')]
     public function logout(): void
     {
-        // This method can be empty, as it will be intercepted by the logout key on your firewall
-        // It will never be executed
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new \LogicException('This method will be intercepted by the logout key on your firewall.');
     }
 }

@@ -1,0 +1,133 @@
+/* public/css/style.css */
+
+/* Style général */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Styles pour le compteur du panier */
+.panier-compteur {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff4757;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.panier-compteur.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.panier-compteur.pulse {
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Styles pour les cartes produit */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-card button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.product-card button:hover {
+    transform: translateY(-2px);
+}
+
+.product-card button:active {
+    transform: translateY(1px);
+}
+
+/* Style pour la page du panier */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+input[name="quantite"] {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+}
+
+/* Animation pour l'ajout au panier */
+@keyframes ajoutePanier {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-20px); opacity: 0.7; }
+    100% { transform: translateY(-40px); opacity: 0; }
+}
+
+.product-added {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(40, 167, 69, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    animation: ajoutePanier 1s forwards;
+}
+/* Couleurs personnalisées */
+.text-purple {
+    color: #8e44ad;
+}
+
+.btn-purple {
+    background-color: #8e44ad;
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: #7d3c98;
+    color: white;
+}
+
+/* Styles des produits */
+.product-card {
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
